@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Voyage Intérieur — Livre de Motivation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600&family=DM+Sans:wght@300;400;500;600&family=Tenor+Sans&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #080608;
+  --black2: #0f0b0e;
+  --surface: #140f12;
+  --surface2: #1c1519;
+  --rose: #ff2d7a;
+  --rose-light: #ff6fa3;
+  --rose-pale: #ffb3cf;
+  --rose-dim: rgba(255,45,122,0.15);
+  --rose-glow: rgba(255,45,122,0.35);
+  --gold: #e8c07a;
+  --text: #f5eef2;
+  --muted: #9a8690;
+  --border: rgba(255,45,122,0.12);
+  --border-strong: rgba(255,45,122,0.3);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ── */
+.cursor {
+  width: 12px; height: 12px;
+  background: var(--rose);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: transform 0.1s, width 0.2s, height 0.2s;
+  mix-blend-mode: screen;
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(255,45,122,0.5);
+  border-radius: 50%;
+  position: fixed; top:0; left:0;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: transform 0.15s ease, width 0.3s, height 0.3s;
+}
+
+/* ── PARTICLES BG ── */
+.particles { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+.particle {
+  position: absolute;
+  width: 2px; height: 2px;
+  border-radius: 50%;
+  background: var(--rose);
+  opacity: 0;
+  animation: particleFloat linear infinite;
+}
+
+@keyframes particleFloat {
+  0%   { opacity:0; transform: translateY(100vh) scale(0); }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.2; }
+  100% { opacity:0; transform: translateY(-20px) scale(1); }
+}
+
+/* ── HEADER ── */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 50px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(8,6,8,0.97), transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--rose-pale);
+  letter-spacing: 0.05em;
+}
+.logo span { color: var(--rose); }
+
+.header-right {
+  display: flex; align-items: center; gap: 20px;
+}
+
+.badge-prix {
+  font-size: 0.7rem;
+  color: var(--rose-light);
+  border: 1px solid var(--border-strong);
+  padding: 5px 14px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 120px 40px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,45,122,0.18) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 2rem;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
+  font-weight: 300;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  animation: fadeUp 1s ease both;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--rose);
+  display: block;
+}
+
+.hero-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-style: italic;
+  color: var(--muted);
+  max-width: 500px;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+  animation: fadeUp 1.2s ease both;
+}
+
+.hero-divider {
+  width: 80px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--rose), transparent);
+  margin: 0 auto 3rem;
+  animation: fadeUp 1.4s ease both;
+}
+
+.hero-cta {
+  animation: fadeUp 1.6s ease both;
+}
+
+.btn-rose {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--rose);
+  color: #fff;
+  padding: 16px 42px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: none;
+  cursor: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.btn-rose::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.15));
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+}
+.btn-rose:hover::before { transform: translateX(0); }
+.btn-rose:hover { box-shadow: 0 0 40px var(--rose-glow); transform: translateY(-2px); }
+
+.hero-stats {
+  display: flex; gap: 60px;
+  margin-top: 5rem;
+  animation: fadeUp 1.8s ease both;
+}
+.stat { text-align: center; }
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--rose);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ── SECTION ── */
+.section { position: relative; z-index: 1; }
+
+.section-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 1.2rem;
+  display: block;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.section-title em { color: var(--rose); font-style: italic; }
+
+/* ── CHAPITRES GRID ── */
+.chapters-section {
+  padding: 100px 60px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.chapters-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: end;
+  margin-bottom: 70px;
+}
+
+.chapters-desc {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 420px;
+}
+
+.prix-info {
+  text-align: right;
+}
+
+.prix-badge {
+  display: inline-block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--rose);
+  line-height: 1;
+}
+
+.prix-label {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.chapters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+/* ── CHAPTER CARD ── */
+.chapter-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s ease;
+  group: true;
+}
+
+.chapter-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--rose), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.chapter-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(255,45,122,0.12);
+}
+.chapter-card:hover::before { opacity: 1; }
+
+.card-glow {
+  position: absolute;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(255,45,122,0.1) 0%, transparent 70%);
+  top: -60px; right: -60px;
+  pointer-events: none;
+}
+
+.card-inner { padding: 32px 28px; }
+
+.card-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: rgba(255,45,122,0.08);
+  line-height: 1;
+  position: absolute;
+  top: 16px; right: 24px;
+  transition: color 0.3s;
+}
+.chapter-card:hover .card-num { color: rgba(255,45,122,0.15); }
+
+.card-chapter-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 12px;
+}
+
+.card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.card-desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+
+.card-tags {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.tag {
+  font-size: 0.6rem;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+.card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.card-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--rose-light);
+}
+
+.card-price span {
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  margin-left: 4px;
+}
+
+.btn-pay {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, var(--rose), #ff6090);
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.btn-pay:hover {
+  box-shadow: 0 8px 28px var(--rose-glow);
+  transform: scale(1.03);
+}
+
+.btn-pay-locked {
+  background: var(--surface2);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.lock-icon { font-size: 0.85rem; }
+
+/* ── MODAL PAIEMENT ── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(8,6,8,0.92);
+  backdrop-filter: blur(8px);
+  z-index: 500;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  width: 100%;
+  max-width: 480px;
+  position: relative;
+  overflow: hidden;
+  transform: translateY(30px);
+  transition: transform 0.35s ease;
+}
+.modal-overlay.open .modal { transform: translateY(0); }
+
+.modal-top-bar {
+  height: 3px;
+  background: linear-gradient(90deg, var(--rose), var(--rose-light), var(--rose));
+}
+
+.modal-header {
+  padding: 28px 32px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: flex-start; justify-content: space-between;
+}
+
+.modal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.modal-subtitle {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.modal-close {
+  background: none; border: none;
+  color: var(--muted); font-size: 1.2rem;
+  cursor: none; padding: 4px;
+  transition: color 0.2s;
+}
+.modal-close:hover { color: var(--rose); }
+
+.modal-body { padding: 28px 32px; }
+
+.payment-method {
+  background: var(--black2);
+  border: 1px solid var(--border);
+  padding: 20px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pm-logo { font-size: 1.8rem; margin-bottom: 8px; }
+
+.pm-name {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.pm-steps { list-style: none; counter-reset: steps; }
+
+.pm-steps li {
+  counter-increment: steps;
+  display: flex; gap: 12px; align-items: flex-start;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.pm-steps li::before {
+  content: counter(steps);
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--rose-dim);
+  color: var(--rose);
+  font-size: 0.65rem;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.pm-steps li strong { color: var(--rose-pale); }
+
+.pm-number {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border-strong);
+  padding: 14px 18px;
+  margin-top: 14px;
+}
+
+.pm-num-label { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.15em; }
+.pm-num-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--rose-light);
+  letter-spacing: 0.1em;
+}
+
+.pm-amount {
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-top: 10px;
+  text-align: center;
+}
+.pm-amount strong { color: var(--rose); font-size: 1rem; }
+
+.btn-whatsapp {
+  width: 100%;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  background: #25D366;
+  color: #fff;
+  border: none;
+  padding: 15px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: none;
+  margin-top: 16px;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.btn-whatsapp:hover { background: #1ebe57; box-shadow: 0 8px 24px rgba(37,211,102,0.3); }
+
+.modal-footer {
+  padding: 16px 32px 24px;
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+
+/* ── CHAPTER READER ── */
+.reader-overlay {
+  position: fixed; inset: 0;
+  background: var(--black);
+  z-index: 600;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.45s cubic-bezier(0.23,1,0.32,1);
+}
+.reader-overlay.open { transform: translateX(0); }
+
+.reader-header {
+  position: sticky; top: 0;
+  background: rgba(8,6,8,0.96);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 18px 50px;
+  display: flex; align-items: center; justify-content: space-between;
+  z-index: 10;
+}
+
+.reader-breadcrumb {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.72rem; color: var(--muted);
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.reader-breadcrumb span { color: var(--rose); }
+
+.btn-close-reader {
+  display: flex; align-items: center; gap: 8px;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 8px 18px;
+  font-size: 0.7rem;
+  cursor: none;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.btn-close-reader:hover { border-color: var(--rose); color: var(--rose); }
+
+/* Chapter Hero */
+.ch-hero {
+  background: var(--black2);
+  border-bottom: 1px solid var(--border);
+  padding: 90px 60px 70px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.ch-hero::before {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(255,45,122,0.12) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+}
+
+.ch-num {
+  font-size: 0.62rem; letter-spacing: 0.45em;
+  text-transform: uppercase; color: var(--rose);
+  margin-bottom: 1.5rem;
+}
+
+.ch-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--text);
+  max-width: 700px;
+  margin: 0 auto 1rem;
+  position: relative;
+}
+
+.ch-title em { color: var(--rose); font-style: italic; }
+
+.ch-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--muted);
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Chapter Content */
+.ch-content {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+.ch-content p {
+  font-size: 1.08rem;
+  line-height: 1.9;
+  color: #c5b8bf;
+  margin-bottom: 1.8rem;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.ch-content p:first-of-type::first-letter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--rose);
+  float: left;
+  line-height: 0.75;
+  margin: 0.08em 0.1em 0 0;
+}
+
+.ch-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 3.5rem 0 1.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.ch-quote {
+  margin: 3rem 0;
+  padding: 2rem 2.5rem;
+  border-left: 2px solid var(--rose);
+  background: rgba(255,45,122,0.04);
+  position: relative;
+}
+
+.ch-quote::before {
+  content: '\201C';
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem;
+  color: var(--rose);
+  opacity: 0.15;
+  position: absolute;
+  top: -15px; left: 16px;
+  line-height: 1;
+}
+
+.ch-quote p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.45rem !important;
+  font-style: italic;
+  color: var(--rose-pale) !important;
+  margin-bottom: 0 !important;
+  text-align: left !important;
+}
+
+.ch-quote cite {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+  color: var(--rose);
+  text-transform: uppercase;
+  margin-top: 1rem;
+  font-style: normal;
+}
+
+.ch-keypoints {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 28px;
+  margin: 3rem 0;
+}
+
+.ch-keypoints-title {
+  font-size: 0.62rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.kp {
+  display: flex; gap: 14px; align-items: flex-start;
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.kp::before {
+  content: '◆';
+  color: var(--rose);
+  font-size: 0.5rem;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.ch-exercise {
+  border: 1px solid var(--border-strong);
+  padding: 28px;
+  margin: 3rem 0;
+  position: relative;
+}
+
+.ch-exercise::before {
+  content: 'EXERCICE';
+  position: absolute;
+  top: -0.6em; left: 20px;
+  background: var(--black);
+  padding: 0 10px;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: var(--rose);
+}
+
+.ch-exercise p { font-size: 0.95rem !important; }
+
+/* ── ABOUT ── */
+.about-section {
+  border-top: 1px solid var(--border);
+  padding: 100px 60px;
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-visual {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.about-ring {
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+
+.about-ring::before {
+  content: '';
+  position: absolute;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255,45,122,0.2);
+  animation: spinSlow 20s linear infinite;
+}
+
+.about-ring-inner {
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,45,122,0.2) 0%, rgba(255,45,122,0.02) 70%);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.about-ring-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--rose);
+  line-height: 1;
+}
+
+.about-ring-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+@keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.about-text p {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+}
+
+/* ── FOOTER ── */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 50px 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: relative; z-index: 1;
+}
+
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  color: var(--rose-pale);
+}
+
+.footer-contact {
+  text-align: right;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.footer-contact a {
+  color: var(--rose);
+  text-decoration: none;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(24px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--rose); border-radius: 2px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .site-header { padding: 16px 24px; }
+  .chapters-section { padding: 70px 24px; }
+  .chapters-intro { grid-template-columns: 1fr; gap: 30px; }
+  .prix-info { text-align: left; }
+  .chapters-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 30px; }
+  .about-section { grid-template-columns: 1fr; padding: 70px 24px; }
+  .about-visual { display: none; }
+  .site-footer { flex-direction: column; gap: 20px; text-align: center; padding: 40px 24px; }
+  .footer-contact { text-align: center; }
+  .reader-header { padding: 16px 24px; }
+  .ch-hero { padding: 70px 24px 50px; }
+  .ch-content { padding: 60px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Particles -->
+<div class="particles" id="particles"></div>
+
+<!-- ══════════ HEADER ══════════ -->
+<header class="site-header">
+  <div class="logo">Le Voyage <span>Intérieur</span></div>
+  <div class="header-right">
+    <div class="badge-prix">200 FCFA / Chapitre</div>
+  </div>
+</header>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <p class="hero-eyebrow">Livre de Développement Personnel</p>
+  <h1 class="hero-title">
+    Le Voyage
+    <em>Intérieur</em>
+  </h1>
+  <p class="hero-subtitle">Un parcours en 8 chapitres vers la meilleure version de vous-même — conscience de soi, vision, discipline, résilience.</p>
+  <div class="hero-divider"></div>
+  <div class="hero-cta">
+    <button class="btn-rose" onclick="scrollToChapters()">
+      Découvrir les chapitres ↓
+    </button>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">8</div><div class="stat-label">Chapitres</div></div>
+    <div class="stat"><div class="stat-num">200</div><div class="stat-label">FCFA / chap.</div></div>
+    <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Transformation</div></div>
+  </div>
+</section>
+
+<!-- ══════════ CHAPITRES ══════════ -->
+<section class="chapters-section section" id="chapitres">
+  <div class="chapters-intro">
+    <div>
+      <span class="section-label">Le Contenu</span>
+      <h2 class="section-title">8 Chapitres pour<br>transformer votre <em>vie</em></h2>
+      <p class="chapters-desc">Chaque chapitre est une étape concrète. Achetez uniquement les chapitres qui vous parlent, ou dévorez le livre entier. Le choix est vôtre.</p>
+    </div>
+    <div class="prix-info">
+      <div class="prix-badge">200<small style="font-size:1.2rem;">fcfa</small></div>
+      <div class="prix-label">par chapitre · paiement unique</div>
+    </div>
+  </div>
+
+  <div class="chapters-grid" id="chaptersGrid">
+    <!-- Cards injectées par JS -->
+  </div>
+</section>
+
+<!-- ══════════ ABOUT ══════════ -->
+<section class="about-section section">
+  <div class="about-visual">
+    <div class="about-ring">
+      <div class="about-ring-inner">
+        <div class="about-ring-num">8</div>
+        <div class="about-ring-label">chapitres</div>
+      </div>
+    </div>
+  </div>
+  <div class="about-text">
+    <span class="section-label">Pourquoi ce livre ?</span>
+    <h2 class="section-title" style="margin-bottom:1.5rem;">Un voyage vers <em>vous-même</em></h2>
+    <p>Le développement personnel n'est pas un luxe — c'est une nécessité pour quiconque veut vivre une vie pleine de sens, d'énergie et de direction. Ce livre condense des années de recherche et de sagesse pratique en chapitres accessibles, concrets et transformateurs.</p>
+    <p>Chaque chapitre vous apporte une clé. Lisez à votre rythme, appliquez les exercices, revenez aux passages qui résonnent. Ce livre est fait pour être vécu, pas seulement lu.</p>
+    <p style="color: var(--rose-pale);">Débutez dès aujourd'hui. Votre meilleure version vous attend.</p>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="site-footer">
+  <div class="footer-logo">Le Voyage Intérieur</div>
+  <div class="footer-contact">
+    Paiement & Contact WhatsApp :<br>
+    <a href="https://wa.me/0163854470">📱 0163854470</a>
+  </div>
+</footer>
+
+<!-- ══════════ MODAL PAIEMENT ══════════ -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal">
+    <div class="modal-top-bar"></div>
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="modalChapterTitle">Chapitre I</div>
+        <div class="modal-subtitle">Déverrouillez ce chapitre maintenant</div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="payment-method">
+        <div class="pm-logo">📱</div>
+        <div class="pm-name">Mobile Money / Orange Money / MTN</div>
+        <ol class="pm-steps">
+          <li>Envoyez <strong>200 FCFA</strong> au numéro ci-dessous via Mobile Money</li>
+          <li>Notez votre <strong>nom complet</strong> en message de paiement</li>
+          <li>Contactez-nous sur WhatsApp avec votre <strong>capture de confirmation</strong></li>
+          <li>Recevez votre <strong>code d'accès</strong> sous quelques minutes</li>
+        </ol>
+        <div class="pm-number">
+          <div>
+            <div class="pm-num-label">Numéro de paiement</div>
+            <div class="pm-num-value">0163854470</div>
+          </div>
+        </div>
+        <div class="pm-amount">Montant exact : <strong>200 FCFA</strong> — un seul paiement pour accès illimité au chapitre</div>
+      </div>
+
+      <a class="btn-whatsapp" id="whatsappBtn" href="#" target="_blank">
+        💬 Envoyer la confirmation sur WhatsApp
+      </a>
+    </div>
+    <div class="modal-footer">
+      Après confirmation, entrez le code reçu pour accéder au chapitre immédiatement.
+      <div style="margin-top: 14px; display:flex; gap:8px;">
+        <input type="text" id="codeInput" placeholder="Entrez votre code d'accès..." style="flex:1;background:var(--black2);border:1px solid var(--border);color:var(--text);padding:10px 14px;font-size:0.82rem;font-family:'DM Sans',sans-serif;outline:none;">
+        <button onclick="verifyCode()" style="background:var(--rose);color:#fff;border:none;padding:10px 20px;font-size:0.78rem;font-weight:700;cursor:none;letter-spacing:0.08em;">OK</button>
+      </div>
+      <div id="codeError" style="color:var(--rose);font-size:0.72rem;margin-top:8px;display:none;">Code incorrect. Contactez-nous sur WhatsApp.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ READER ══════════ -->
+<div class="reader-overlay" id="readerOverlay">
+  <div class="reader-header">
+    <div class="reader-breadcrumb">
+      Le Voyage Intérieur → <span id="readerChapterLabel">Chapitre I</span>
+    </div>
+    <button class="btn-close-reader" onclick="closeReader()">✕ Fermer</button>
+  </div>
+  <div id="readerContent"></div>
+</div>
+
+<script>
+// ═══ DATA ═══
+const WHATSAPP = '0163854470';
+const PRICE = 200;
+
+const chapters = [
+  {
+    id: 1,
+    num: 'I',
+    title: 'La Prise de Conscience de Soi',
+    desc: 'Comprendre qui vous êtes vraiment — vos forces, vos failles, vos peurs et vos rêves. Le fondement de toute transformation.',
+    tags: ['Introspection','Identité','Forces'],
+    color: '#ff2d7a',
+    tagline: 'Se connaître soi-même est le premier acte courageux du voyage intérieur.',
+    content: `
+      <p>Tout voyage commence par un premier pas — et dans le développement personnel, ce pas est tourné vers l'intérieur. Avant de chercher à transformer quoi que ce soit dans notre vie, nous devons d'abord comprendre qui nous sommes vraiment : nos forces, nos failles, nos peurs secrètes et les rêves que nous n'osons pas encore formuler.</p>
+      <p>La prise de conscience de soi est un acte à la fois simple et vertigineux. Simple, parce qu'il ne nécessite aucun outil extérieur — seulement une honnêteté courageuse avec soi-même. Vertigineux, parce que regarder en face ce que l'on est peut parfois révéler des vérités inconfortables.</p>
+      <div class="ch-quote"><p>Connais-toi toi-même, et tu connaîtras l'univers et les dieux.</p><cite>— Socrate</cite></div>
+      <h2 class="ch-h2">Comprendre ses forces et ses faiblesses</h2>
+      <p>Chacun de nous est une combinaison unique de talents naturels, de compétences acquises et de zones d'ombre. Les forces sont ces capacités qui nous viennent avec aisance, qui nous donnent de l'énergie plutôt qu'elles n'en consomment. Les faiblesses ne sont pas là pour nous accabler — elles sont des territoires de croissance possible.</p>
+      <p>Il ne s'agit pas de s'aimer aveuglément ni de se critiquer sans merci. La conscience de soi est un regard lucide, bienveillant et honnête.</p>
+      <h2 class="ch-h2">Identifier ses peurs profondes</h2>
+      <p>Derrière chaque habitude destructrice, chaque évitement, chaque colère disproportionnée se cache souvent une peur. Peur du rejet, de l'échec, de ne pas être suffisant. Ces peurs ne sont pas des défauts — elles sont des mécanismes de protection façonnés par nos expériences passées. Les reconnaître, c'est déjà commencer à les transformer.</p>
+      <div class="ch-keypoints"><span class="ch-keypoints-title">Points Clés</span><div class="kp">La conscience de soi est le fondement de toute transformation durable.</div><div class="kp">Identifier ses forces permet de les utiliser stratégiquement dans sa vie.</div><div class="kp">Les peurs non examinées gouvernent nos choix à notre insu.</div><div class="kp">L'introspection régulière est une pratique, non un événement ponctuel.</div></div>
+      <div class="ch-exercise"><p><strong>Exercice du miroir :</strong> Prenez une feuille et tracez deux colonnes. Dans la première, listez 5 qualités que vous reconnaissez en vous. Dans la seconde, 5 zones de croissance. Pour chaque élément, demandez-vous : « D'où vient cette force ? » et « Cette faiblesse me protège-t-elle de quelque chose ? »</p></div>
+    `
+  },
+  {
+    id: 2,
+    num: 'II',
+    title: 'Définir Sa Vision',
+    desc: 'Construire une image claire et émotionnellement vivante de la vie que vous voulez créer. Sans vision, pas de direction.',
+    tags: ['Vision','Objectifs','Sens'],
+    tagline: 'Une vie sans vision est comme un navire sans boussole.',
+    content: `
+      <p>Après avoir exploré qui nous sommes, vient la question fondamentale : qui voulons-nous devenir ? La vision est cet horizon lumineux que nous choisissons de rejoindre — une image claire, précise et porteuse d'émotion de la vie que nous désirons construire.</p>
+      <p>Sans vision, nous réagissons au lieu d'agir. Nous laissons les circonstances décider pour nous, les habitudes du passé dicter notre présent.</p>
+      <div class="ch-quote"><p>Celui qui a un pourquoi peut supporter presque n'importe quel comment.</p><cite>— Friedrich Nietzsche</cite></div>
+      <h2 class="ch-h2">La différence entre rêve et vision</h2>
+      <p>Un rêve est vague, flottant, sans ancrage temporel. Une vision, elle, est précise, ancrée dans le réel et orientée vers l'action. La vision répond non seulement à « Que veux-je ? » mais aussi à « Pourquoi le veux-je ? » et « Comment est-ce que je sais que j'y suis arrivé ? »</p>
+      <h2 class="ch-h2">Construire une vision multidimensionnelle</h2>
+      <p>Une vision de vie complète embrasse plusieurs domaines : santé, vie professionnelle, relations, épanouissement spirituel. L'erreur commune est de se concentrer sur un seul aspect — souvent la carrière — au détriment des autres.</p>
+      <div class="ch-keypoints"><span class="ch-keypoints-title">Points Clés</span><div class="kp">Une vision claire est la première étape vers une vie intentionnelle.</div><div class="kp">La vision doit être précise, émotionnellement vivante et multidimensionnelle.</div><div class="kp">Écrire sa vision la rend concrète et augmente les chances de réalisation.</div></div>
+      <div class="ch-exercise"><p><strong>La lettre du futur :</strong> Écrivez une lettre de vous-même dans 10 ans à vous-même aujourd'hui. Décrivez votre vie en détail. Lisez cette lettre chaque matin pendant une semaine.</p></div>
+    `
+  },
+  {
+    id: 3,
+    num: 'III',
+    title: 'La Motivation Intérieure vs Extérieure',
+    desc: 'Comprendre la différence entre agir par passion authentique ou par récompense et pression extérieure — et pourquoi cela change tout.',
+    tags: ['Motivation','Passion','Autonomie'],
+    tagline: 'Quand le travail lui-même est la récompense, l\'effort ne ressemble plus à un effort.',
+    content: `
+      <p>Pourquoi certaines personnes se lèvent-elles le matin avec une énergie débordante tandis que d'autres traînent des pieds ? La réponse se trouve dans la nature même de leur motivation. La psychologie distingue deux sources : la motivation intrinsèque, qui jaillit de l'intérieur, et la motivation extrinsèque, qui vient du dehors sous forme de récompenses ou de pressions.</p>
+      <div class="ch-quote"><p>Agis par passion, non par obligation — et tu ne travailleras pas un seul jour de ta vie.</p><cite>— Proverbe</cite></div>
+      <h2 class="ch-h2">La Motivation Intérieure : le feu qui ne s'éteint pas</h2>
+      <p>La motivation intrinsèque est cette force qui vous pousse à agir pour la pure satisfaction de l'activité elle-même. Elle est alimentée par trois besoins : l'autonomie (agir selon ses valeurs), la compétence (progresser) et la connexion (agir en lien avec ce qui compte).</p>
+      <h2 class="ch-h2">L'effet de surjustification</h2>
+      <p>Des études montrent un phénomène fascinant : quand on commence à récompenser extérieurement une activité qu'on aimait déjà, la motivation intérieure diminue. La récompense extérieure contamine le plaisir intrinsèque. Ce que vous faisiez par amour, vous le faites pour la carotte — et dès que la carotte disparaît, vous arrêtez.</p>
+      <div class="ch-keypoints"><span class="ch-keypoints-title">Points Clés</span><div class="kp">La motivation intrinsèque est durable et régénératrice — elle vient de l'intérieur.</div><div class="kp">La motivation extrinsèque s'évapore dès que la récompense disparaît.</div><div class="kp">L'effet de surjustification montre que récompenser une passion peut l'éteindre.</div><div class="kp">Le sens profond de ses actions est le meilleur carburant durable.</div></div>
+      <div class="ch-exercise"><p><strong>L'Audit de vos Motivations :</strong> Listez vos activités régulières. Pour chacune, notez honnêtement : « Je fais cela parce que… » Identifiez si la source est interne ou externe. Choisissez une activité à recentrer sur son sens profond.</p></div>
+    `
+  },
+  {
+    id: 4,
+    num: 'IV',
+    title: 'Les Habitudes Positives',
+    desc: 'L\'architecture invisible de votre existence — comment construire des habitudes qui vous propulsent vers votre vision chaque jour.',
+    tags: ['Habitudes','Discipline','Routine'],
+    tagline: 'Nous ne sommes pas le fruit de nos intentions, mais de nos habitudes quotidiennes.',
+    content: `
+      <p>Les grandes transformations ne viennent pas d'un seul acte héroïque. Elles naissent de l'accumulation silencieuse de petites actions répétées chaque jour. Les habitudes sont l'architecture invisible de notre existence — environ 40 à 45 % de nos comportements quotidiens sont automatiques.</p>
+      <div class="ch-quote"><p>La discipline est le pont entre les objectifs et les accomplissements.</p><cite>— Jim Rohn</cite></div>
+      <h2 class="ch-h2">La gestion du temps : reprendre sa vie en main</h2>
+      <p>Le temps est la ressource la plus démocratique — chacun en reçoit exactement 24 heures par jour. Planifier sa journée la veille, identifier ses tâches à haute valeur, apprendre à dire non aux sollicitations qui dévient de sa vision — autant de pratiques transformatrices.</p>
+      <h2 class="ch-h2">La pensée constructive et la maîtrise des émotions</h2>
+      <p>Notre dialogue intérieur façonne notre réalité. La pensée constructive ne consiste pas à nier la réalité — c'est l'art d'orienter son esprit vers les solutions plutôt que les problèmes. La maîtrise émotionnelle commence par l'observation : créer un espace entre le stimulus et la réponse.</p>
+      <div class="ch-keypoints"><span class="ch-keypoints-title">Points Clés</span><div class="kp">Les habitudes automatisent nos comportements et définissent notre vie à long terme.</div><div class="kp">La pensée constructive se pratique et se renforce comme un muscle.</div><div class="kp">Commencer petit : une nouvelle habitude à la fois, pendant 21 à 66 jours.</div></div>
+      <div class="ch-exercise"><p><strong>Le rituel du matin :</strong> Consacrez les 30 premières minutes de chaque journée à vous : 10 min de mouvement, 10 min de lecture inspirante, 10 min d'écriture libre. Maintenez ce rituel 30 jours consécutifs.</p></div>
+    `
+  },
+  {
+    id: 5,
+    num: 'V',
+    title: 'Sortir de Sa Zone de Confort',
+    desc: 'Tout ce que vous désirez vraiment se trouve de l\'autre côté de vos peurs. Apprenez à avancer malgré l\'inconfort.',
+    tags: ['Courage','Peur','Croissance'],
+    tagline: 'La croissance commence là où la certitude s\'arrête.',
+    content: `
+      <p>La zone de confort est un lieu douillet, familier, prévisible. Elle nous offre la sécurité du connu. Et pourtant, c'est là où la vie, lentement, se rétrécit. Car tout ce que nous désirons vraiment se trouve de l'autre côté de nos peurs.</p>
+      <div class="ch-quote"><p>La vie commence à la fin de ta zone de confort.</p><cite>— Neale Donald Walsch</cite></div>
+      <h2 class="ch-h2">Le paradoxe de l'inconfort</h2>
+      <p>L'anxiété que nous ressentons avant d'agir malgré la peur est presque toujours pire que la réalité de l'acte lui-même. Notre cerveau surestime systématiquement les dangers et sous-estime nos capacités à y faire face. Chaque fois que vous faites quelque chose qui vous effrayait, votre zone de confort s'élargit.</p>
+      <h2 class="ch-h2">Avancer par petits pas audacieux</h2>
+      <p>Il n'est pas nécessaire de tout bouleverser d'un coup. L'approche la plus efficace est celle des petits pas réguliers : prendre la parole en réunion, appeler quelqu'un qu'on a peur de déranger, essayer une activité inconnue. Chaque acte est une victoire sur la peur.</p>
+      <div class="ch-keypoints"><span class="ch-keypoints-title">Points Clés</span><div class="kp">La zone de confort protège mais emprisonne si on n'en sort jamais.</div><div class="kp">Le cerveau surestime les risques — l'action recalibre cette perception.</div><div class="kp">Les petits actes courageux quotidiens sont plus puissants qu'un grand saut rare.</div></div>
+      <div class="ch-exercise"><p><strong>Le défi des 7 jours :</strong> Chaque jour pendant une semaine, faites une chose qui vous fait légèrement peur. Pas terrifiante — juste légèrement inconfortable. Notez chaque expérience dans un carnet.</p></div>
+    `
+  },
+  {
+    id: 6,
+    num: 'VI',
+    title: 'Apprendre de Ses Échecs',
+    desc: 'L\'échec n\'est pas la fin du voyage — c\'est souvent le meilleur professeur que l\'on puisse rencontrer. Réapprenez à tomber.',
+    tags: ['Résilience','Échec','Rebond'],
+    tagline: 'Notre plus grande gloire n\'est pas de ne jamais tomber, mais de nous relever à chaque chute.',
+    content: `
+      <p>Dans notre culture, l'échec porte encore une lourde charge de honte. On enseigne aux enfants qu'il ne faut pas rater. Cette équation toxique paralyse des millions de personnes qui préfèrent ne jamais essayer plutôt que risquer d'échouer.</p>
+      <p>Et pourtant, chaque grande réussite humaine est ponctuée d'échecs. Edison aurait dit avoir découvert dix mille façons de ne pas fabriquer une ampoule avant de trouver la bonne. L'échec n'est pas l'opposé du succès — il en est le chemin.</p>
+      <div class="ch-quote"><p>Notre plus grande gloire n'est pas de ne jamais tomber, mais de nous relever à chaque chute.</p><cite>— Confucius</cite></div>
+      <h2 class="ch-h2">Changer de regard sur l'échec</h2>
+      <p>La première transformation à opérer est interne : cesser de voir l'échec comme un jugement sur notre valeur. « Cela n'a pas fonctionné » est très différent de « je suis un raté ». La première phrase ouvre une enquête utile. La seconde ferme toutes les portes.</p>
+      <div class="ch-keypoints"><span class="ch-keypoints-title">Points Clés</span><div class="kp">L'échec n'est pas une définition de soi — c'est un événement porteur d'information.</div><div class="kp">La résilience se développe en traversant les difficultés, pas en les évitant.</div><div class="kp">Les plus grands succès sont construits sur de nombreuses tentatives ratées.</div></div>
+      <div class="ch-exercise"><p><strong>L'autopsie bienveillante :</strong> Prenez un échec récent qui vous pèse. Répondez par écrit : (1) Que s'est-il passé ? (2) Quel rôle ai-je joué ? (3) Qu'ai-je appris ? (4) Que ferais-je différemment ? Terminez en vous demandant : « Si un ami traversait cela, que lui dirais-je ? »</p></div>
+    `
+  },
+  {
+    id: 7,
+    num: 'VII',
+    title: 'La Constance dans l\'Effort',
+    desc: 'La motivation est une étincelle, la constance est le feu qui dure. Découvrez la puissance des intérêts composés appliqués à soi.',
+    tags: ['Persévérance','Discipline','Long terme'],
+    tagline: 'La motivation est une étincelle. La constance est le feu qui dure.',
+    content: `
+      <p>Il y a un mythe dans le développement personnel : celui de la transformation soudaine. La réalité est à la fois moins spectaculaire et infiniment plus puissante : c'est la constance dans les efforts quotidiens qui produit des changements durables et profonds.</p>
+      <div class="ch-quote"><p>Le succès n'est pas la clé du bonheur. Le bonheur est la clé du succès.</p><cite>— Albert Schweitzer</cite></div>
+      <h2 class="ch-h2">L'effet des intérêts composés appliqué à soi</h2>
+      <p>Une amélioration de seulement 1 % par jour donne une progression 37 fois supérieure à son point de départ en un an. Inversement, une régression de 1 % par jour laisse l'être humain à 3 % de sa valeur initiale. La constance dans les petits efforts produit des résultats exponentiels invisibles à court terme mais extraordinaires à long terme.</p>
+      <div class="ch-keypoints"><span class="ch-keypoints-title">Points Clés</span><div class="kp">La constance surpasse toujours l'intensité sporadique dans le temps.</div><div class="kp">Tenir ses engagements envers soi-même renforce l'estime de soi profondément.</div><div class="kp">L'effet cumulatif de petites actions quotidiennes est exponentiellement puissant.</div></div>
+      <div class="ch-exercise"><p><strong>Le tableau de bord personnel :</strong> Choisissez 3 comportements clés. Créez un tableau où vous cochez chaque jour où vous les avez accomplis. En cas de manquement, la règle d'or : ne jamais en sauter deux fois de suite.</p></div>
+    `
+  },
+  {
+    id: 8,
+    num: 'VIII',
+    title: 'L\'Équilibre Corps, Esprit & Relations',
+    desc: 'Une vie épanouie est une symphonie, non un solo. L\'équilibre entre le corps, la vie intérieure et les relations est la clé.',
+    tags: ['Équilibre','Relations','Bien-être'],
+    tagline: 'Une vie épanouie est une symphonie, non un solo.',
+    content: `
+      <p>Le développement personnel n'est pas une affaire solitaire. Il se déploie dans toutes les dimensions de notre existence : notre corps physique, notre vie intérieure, et le réseau de relations qui nous entoure. Négliger l'une de ces dimensions, c'est construire un édifice sur des fondations incomplètes.</p>
+      <div class="ch-quote"><p>Prends soin de ton corps. C'est le seul endroit où tu sois obligé de vivre.</p><cite>— Jim Rohn</cite></div>
+      <h2 class="ch-h2">Le corps : le temple de l'esprit</h2>
+      <p>La qualité de notre sommeil détermine notre clarté mentale. Notre alimentation influence notre humeur et notre énergie. Le mouvement régulier libère des neurochimiques qui réduisent l'anxiété et renforcent la confiance. Prendre soin de son corps est un acte de respect fondamental envers soi-même.</p>
+      <h2 class="ch-h2">Les relations : le miroir et le carburant</h2>
+      <p>Nous sommes des êtres fondamentalement relationnels. Des études montrent que l'isolement social est aussi néfaste pour la santé que fumer quinze cigarettes par jour. Les personnes qui nous entourent nous tirent vers le haut ou vers le bas. Choisir son entourage est un acte de développement personnel.</p>
+      <div class="ch-keypoints"><span class="ch-keypoints-title">Points Clés</span><div class="kp">Le corps, l'esprit et les relations forment un système interdépendant.</div><div class="kp">Une vie intérieure cultivée offre stabilité et ressourcement face aux défis.</div><div class="kp">L'équilibre est dynamique — il se recalibre constamment avec attention et intention.</div></div>
+      <div class="ch-exercise"><p><strong>L'audit de vie :</strong> Tracez un cercle divisé en 6 secteurs : Corps, Alimentation, Sommeil, Relations, Vie intérieure, Loisirs. Attribuez une note de 1 à 10 à chaque secteur. Identifiez le plus faible. Choisissez UNE action concrète cette semaine.</p></div>
+    `
+  }
+];
+
+// Codes d'accès (générés par chapitre — dans un vrai système ce serait côté serveur)
+const ACCESS_CODES = {
+  1: 'VIN2024CH1',
+  2: 'VIN2024CH2',
+  3: 'VIN2024CH3',
+  4: 'VIN2024CH4',
+  5: 'VIN2024CH5',
+  6: 'VIN2024CH6',
+  7: 'VIN2024CH7',
+  8: 'VIN2024CH8',
+};
+
+let unlockedChapters = JSON.parse(localStorage.getItem('unlocked_chapters') || '[]');
+let currentChapterId = null;
+
+// ═══ RENDER CARDS ═══
+function renderCards() {
+  const grid = document.getElementById('chaptersGrid');
+  grid.innerHTML = '';
+  chapters.forEach(ch => {
+    const unlocked = unlockedChapters.includes(ch.id);
+    const card = document.createElement('div');
+    card.className = 'chapter-card';
+    card.innerHTML = `
+      <div class="card-glow"></div>
+      <div class="card-num">${ch.num}</div>
+      <div class="card-inner">
+        <div class="card-chapter-label">Chapitre ${ch.num}</div>
+        <h3 class="card-title">${ch.title}</h3>
+        <p class="card-desc">${ch.desc}</p>
+        <div class="card-tags">${ch.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        <div class="card-footer">
+          <div class="card-price">${unlocked ? '<span style="color:var(--rose-light);font-size:0.8rem;">✓ Déverrouillé</span>' : `${PRICE} <span>FCFA</span>`}</div>
+          ${unlocked
+            ? `<button class="btn-pay" onclick="openReader(${ch.id})">📖 Lire</button>`
+            : `<button class="btn-pay" onclick="openModal(${ch.id})"><span class="lock-icon">🔓</span> Acheter</button>`
+          }
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// ═══ MODAL ═══
+function openModal(chapterId) {
+  currentChapterId = chapterId;
+  const ch = chapters.find(c => c.id === chapterId);
+  document.getElementById('modalChapterTitle').textContent = `Chapitre ${ch.num} — ${ch.title}`;
+  const msg = encodeURIComponent(`Bonjour ! Je viens de payer 200 FCFA pour le Chapitre ${ch.num} "${ch.title}" du livre Le Voyage Intérieur. Voici ma confirmation de paiement : [joindre capture]. Merci !`);
+  document.getElementById('whatsappBtn').href = `https://wa.me/${WHATSAPP}?text=${msg}`;
+  document.getElementById('codeInput').value = '';
+  document.getElementById('codeError').style.display = 'none';
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+function verifyCode() {
+  const code = document.getElementById('codeInput').value.trim().toUpperCase();
+  const expected = ACCESS_CODES[currentChapterId];
+  if (code === expected) {
+    if (!unlockedChapters.includes(currentChapterId)) {
+      unlockedChapters.push(currentChapterId);
+      localStorage.setItem('unlocked_chapters', JSON.stringify(unlockedChapters));
+    }
+    closeModal();
+    renderCards();
+    setTimeout(() => openReader(currentChapterId), 200);
+  } else {
+    document.getElementById('codeError').style.display = 'block';
+    document.getElementById('codeInput').style.borderColor = 'var(--rose)';
+    setTimeout(() => { document.getElementById('codeInput').style.borderColor = ''; }, 1500);
+  }
+}
+
+// ═══ READER ═══
+function openReader(chapterId) {
+  const ch = chapters.find(c => c.id === chapterId);
+  document.getElementById('readerChapterLabel').textContent = `Chapitre ${ch.num} — ${ch.title}`;
+  document.getElementById('readerContent').innerHTML = `
+    <div class="ch-hero">
+      <div class="ch-num">Chapitre ${ch.num}</div>
+      <h1 class="ch-title">${ch.title}</h1>
+      <p class="ch-tagline">${ch.tagline}</p>
+    </div>
+    <div class="ch-content">${ch.content}</div>
+  `;
+  document.getElementById('readerOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeReader() {
+  document.getElementById('readerOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ═══ SCROLL ═══
+function scrollToChapters() {
+  document.getElementById('chapitres').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ═══ CURSOR ═══
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+(function animRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animRing);
+})();
+
+// ═══ PARTICLES ═══
+(function createParticles() {
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (8 + Math.random() * 15) + 's';
+    p.style.animationDelay = (Math.random() * 15) + 's';
+    p.style.width = p.style.height = (1 + Math.random() * 3) + 'px';
+    p.style.opacity = Math.random() * 0.5;
+    container.appendChild(p);
+  }
+})();
+
+// ═══ INIT ═══
+renderCards();
+</script>
+</body>
+</html>
